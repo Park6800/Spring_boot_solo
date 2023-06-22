@@ -1,0 +1,10 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/JSP/
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Diary_Base?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 1234

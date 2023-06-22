@@ -1,0 +1,11 @@
+#layout {
+    display:flex;
+}
+
+#left_container {
+    width: 70%;
+}
+
+#right_container {
+    width: 30%;
+}
