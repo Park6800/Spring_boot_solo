@@ -6,6 +6,18 @@
     width: 70%;
 }
 
+#input_container{
+    width:30%;
+    display:inline-block;
+}
+
 #right_container {
-    width: 30%;
+    height:500px;
+    background:gray;
+}
+
+#Account_book {
+
+    height:500px;
+    background:green;
 }

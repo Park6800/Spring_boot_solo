@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class DiaryDto {
     private int Diary_Id;
     private int Year;
-    private int Moon;
+    private int Month;
     private int Day;
     private String Title;
     private String Content;
@@ -20,7 +20,7 @@ public class DiaryDto {
         DiaryDto diaryDto = new DiaryDto();
         diaryDto.setDiary_Id(diaryEntity.getDiary_Id());
         diaryDto.setYear(diaryEntity.getYear());
-        diaryDto.setMoon(diaryEntity.getMoon());
+        diaryDto.setMonth(diaryEntity.getMonth());
         diaryDto.setDay(diaryEntity.getDay());
         diaryDto.setTitle(diaryEntity.getTitle());
         diaryDto.setContent(diaryEntity.getContent());

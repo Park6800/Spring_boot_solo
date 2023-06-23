@@ -21,8 +21,8 @@ public class DiaryEntity {
     private Integer Diary_Id;
     @Column(name = "Year")
     private int year;
-    @Column(name = "Moon")
-    private int moon;
+    @Column(name = "Month")
+    private int month;
     @Column(name = "Day")
     private int day;
     @Column(name = "Title")
@@ -34,7 +34,7 @@ public class DiaryEntity {
         DiaryEntity diaryEntity = new DiaryEntity();
         diaryEntity.setDiary_Id(diaryDto.getDiary_Id());
         diaryEntity.setYear(diaryDto.getYear());
-        diaryEntity.setMoon(diaryDto.getMoon());
+        diaryEntity.setMonth(diaryDto.getMonth());
         diaryEntity.setDay(diaryDto.getDay());
         diaryEntity.setTitle(diaryDto.getTitle());
         diaryEntity.setContent(diaryDto.getContent());

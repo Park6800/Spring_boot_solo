@@ -1,6 +1,9 @@
 package Annotation.Controller;
 
+import Annotation.Dto.AccountDto;
+import Annotation.Dto.Detail_Diary_Dto;
 import Annotation.Dto.DiaryDto;
+import Annotation.Entity.AccountEntity;
 import Annotation.Entity.DiaryEntity;
 import Annotation.Service.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +24,18 @@ public class MainController {
         return "mainpage";
     }
 
-    @GetMapping("/diary/{Monn}")
-    public String diary(@RequestParam("Moon") int moon , DiaryEntity diaryEntity, Model model) {
-        List<DiaryEntity> diaryDtos = new ArrayList<DiaryEntity>();
-        diaryDtos = diaryService.LoadPage(diaryEntity);
-
-
+    @GetMapping("/diary")
+    public String diary(@RequestParam("Month") int month , DiaryEntity diaryEntity, Model model) {
+        List<DiaryEntity> diaryEntities = new ArrayList<DiaryEntity>();
+        diaryEntities = diaryService.LoadPage(diaryEntity);
+        // 기존에 작성 되있던 다이어리 리스트
+        // 월 별 작성 다이어리 리스트로 가져옴
+        model.addAttribute("Diary_List", diaryEntities);
+        model.addAttribute("Month" , month);
         return "diary";
     }
 
+    // ajax 다이어리 작성
     @PostMapping("/diary")
     @ResponseBody // json 값 diary이 반환
     public List<DiaryEntity> Update(DiaryDto diaryDto) {
@@ -38,5 +44,29 @@ public class MainController {
 
         diaryList = diaryService.diaryPlus(diaryDto);
         return diaryList;
+    }
+
+    @GetMapping("/diary/detail/{title}")
+    public String detail(@PathVariable("title") String title , Model model) {
+        List<DiaryEntity> detailDiaryDtos = diaryService.selecct_diary(title);
+        model.addAttribute("Detail" , detailDiaryDtos);
+        return "detail_diary";
+    }
+
+    @PostMapping("/diary/detail")
+    public String FixDiary(DiaryDto diaryDto) {
+        int Month = diaryDto.getMonth();
+        diaryService.Fixdiary(diaryDto);
+        // 기존 ' 월 ' 다이어리로 리다이렉트
+        return "redirect:/diary?Month=" + Month;
+    }
+
+    @PostMapping("/Account_book")
+    @ResponseBody // json 값 diary이 반환
+    public List<AccountEntity> AccountMoney(AccountDto accountDto) {
+        List<AccountEntity> accountlist = new ArrayList<AccountEntity>();
+        accountlist = diaryService.findMoney(accountDto);
+        diaryService.AccountSave(accountDto);
+        return accountlist;
     }
 }

@@ -1,0 +1,12 @@
+body {
+    margin :0;
+    padding: 0;
+}
+#title_value{
+    width:500px;
+}
+
+#content_value {
+    width:500px;
+    height:600px;
+}
