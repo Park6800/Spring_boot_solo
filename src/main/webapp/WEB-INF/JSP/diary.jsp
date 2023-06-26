@@ -8,7 +8,9 @@
 <meta charset="UTF-8">
 <title>메인 홈</title>
 <link rel="stylesheet" href="/css/diary.css">
-</head>
+<%-- 차트 라이브러리--%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 function Plus(Title, Content) {
@@ -42,10 +44,25 @@ function Plus(Title, Content) {
     });
 }
 
-function Account_money(Money, Where) {
+$(document).ready(function() {
+
+    // 이벤트 핸들러 등록
+   $("#Money_btn").click(function() {
+       // 버튼 클릭 시 호출되는 부분
+       var money = $("#Money").val();
+       var where = $("#Where").val();
+       var month = $("#Month").val();
+       Account_money(money, where, month);
+   });
+    var money = 0;
+    var where = "";
+    var month = $("#Month").val(); // 페이지 로딩 시 Month 값을 가져옴
+    Account_money(money, where, month);
+});
+
+function Account_money(Money, Where, Month) {
      var currentDate = new Date();
      var Year = currentDate.getFullYear();
-     var Month = currentDate.getMonth() + 1; // (+1을 해주는 이유는 getMonth()의 반환값이 0부터 시작하기 때문)
      var Day = currentDate.getDate();
     $.ajax({
         url: "/Account_book",
@@ -53,13 +70,58 @@ function Account_money(Money, Where) {
         cache: false,
         dataType: 'json',
         data: { Money: Money, Where_use: Where, Year:Year, Month:Month, Day:Day},
+        async: false, // AJAX 요청을 동기적으로 처리합니다.
         success: function (data) {
+            var accountList = data.accountList;
+            var countMap = data.countMap;
+            var moneyMap = data.moneyMap;
+
+            var labels = Object.keys(countMap);
+            var dataPoints = Object.values(countMap);
+
+            var moneyLabels = Object.keys(moneyMap);
+            var moneyDataPoints = Object.values(moneyMap);
+
+                        var pieChartData = {
+                            labels: labels,
+                            datasets: [{
+                                data: dataPoints,
+                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)']
+                            }]
+                        };
+
+                        var ctx = document.getElementById('pieChartCanvas').getContext('2d');
+                        window.pieChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: pieChartData,
+                            options: {
+                                responsive: false
+                            }
+                        });
+
+                        var pieChartData2 = {
+                            labels: moneyLabels,
+                            datasets: [{
+                                data: moneyDataPoints,
+                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)']
+                                }]
+                        };
+
+                        var ctx2 = document.getElementById('pieChartCanvas2').getContext('2d');
+                        window.pieChart = new Chart(ctx2, {
+                            type: 'pie',
+                            data: pieChartData2,
+                            options: {
+                                responsive: false
+                            }
+                        });
+
             var list_container = $("#total_money");
             var total = 0;
-            for (var i = 0; i < data.length; i++) {
-            console.log(data)
-                 total += data[i].money;
+            for (var i = 0; i < accountList.length; i++) {
+                 total += accountList[i].money;
             }
+            list_container.empty();
             list_container.append("<div><span>" + total + "원" + "</span></div>");
         },
         error: function (request, status, error) {
@@ -68,6 +130,7 @@ function Account_money(Money, Where) {
     });
 }
 </script>
+</head>
 <body>
     <div id="layout">
         <div id="left_container">
@@ -102,6 +165,7 @@ function Account_money(Money, Where) {
             <h2>가계부</h2
                 <div>
                     <input type="number" id="Money">
+                    <input type="hidden" id="Month" value="${Month}">
                     <select id="Where">
                         <option value="카페">카페</option>
                         <option value="식당">식당</option>
@@ -109,10 +173,20 @@ function Account_money(Money, Where) {
                         <option value="문화 생활">문화 생활</option>
                         <option value="교통비">교통비</option>
                     </select>
-                    <button onclick="Account_money(Money.value , Where.value)">추가 하기</button>
-                </div>
-                <div>
-                    <div id="total_money"></div>
+                    <button id="Money_btn">추가 하기</button>
+                    <div id="charts">
+                        <div class="chart-div">
+                             <canvas id="pieChartCanvas" width="300px" height="300px"></canvas>
+                             <div class="Chart_info">금액별 사용처</div>
+                        </div>
+                        <div class="chart-divs2">
+                             <canvas id="pieChartCanvas2" width="300px" height="300px"></canvas>
+                             <div class="Chart_info">사용처별 금액</div>
+                        </div>
+                        <div>
+                             <div id="total_money"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

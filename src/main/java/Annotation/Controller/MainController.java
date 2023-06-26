@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -63,10 +65,31 @@ public class MainController {
 
     @PostMapping("/Account_book")
     @ResponseBody // json 값 diary이 반환
-    public List<AccountEntity> AccountMoney(AccountDto accountDto) {
+    public Map<String, Object> AccountMoney(AccountDto accountDto) {
         List<AccountEntity> accountlist = new ArrayList<AccountEntity>();
+        System.out.println(accountlist);
+        if(accountDto.getMoney() != 0 || accountDto.getWhere_use()!="") {
+            diaryService.AccountSave(accountDto);
+        }
         accountlist = diaryService.findMoney(accountDto);
-        diaryService.AccountSave(accountDto);
-        return accountlist;
+
+        Map<String, Integer> MoneyMap = new HashMap<>();
+        for (AccountEntity account : accountlist) {
+            int Count_Money = diaryService.getCountByMoney(account.getWhere_use());
+            MoneyMap.put(account.getWhere_use(), Count_Money);
+        }
+
+        // 금액 사용처
+        Map<String, Integer> countMap = new HashMap<>();
+        for (AccountEntity account : accountlist) {
+            int count = diaryService.getCountByWhere(account.getWhere_use());
+            countMap.put(account.getWhere_use(), count);
+        }
+        // Map < key , value > response에 대입
+        Map<String, Object> response = new HashMap<>();
+        response.put("accountList", accountlist);
+        response.put("countMap", countMap);
+        response.put("moneyMap", MoneyMap);
+        return response;
     }
 }

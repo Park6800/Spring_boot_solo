@@ -72,9 +72,10 @@ public class DiaryService {
     }
 
     public List<AccountEntity> findMoney (AccountDto accountDto) {
+        System.out.println("service : " + accountDto);
         List<AccountEntity> accountlist = null;
         try {
-            accountlist = accountRepository.findAll();
+            accountlist = accountRepository.findAll(accountDto.getMonth());
         } catch (Exception error){
             error.printStackTrace();
         }
@@ -89,5 +90,13 @@ public class DiaryService {
         } catch (Exception error){
             error.printStackTrace();
         }
+    }
+
+    public int getCountByWhere(String location) {
+        return accountRepository.countByWhere_use(location);
+    }
+
+    public int getCountByMoney(String location) {
+        return  accountRepository.countByMoney(location);
     }
 }
