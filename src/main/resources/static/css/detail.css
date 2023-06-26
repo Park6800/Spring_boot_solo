@@ -10,3 +10,8 @@ body {
     width:500px;
     height:600px;
 }
+
+#content_value {
+    vertical-align: top;
+    text-align: left;
+}

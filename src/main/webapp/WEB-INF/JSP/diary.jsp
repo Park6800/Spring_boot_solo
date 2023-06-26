@@ -13,10 +13,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-function Plus(Title, Content) {
+function Plus(Title, Content , Month) {
      var currentDate = new Date();
      var Year = currentDate.getFullYear();
-     var Month = currentDate.getMonth() + 1; // (+1을 해주는 이유는 getMonth()의 반환값이 0부터 시작하기 때문)
      var Day = currentDate.getDate();
     $.ajax({
         url: "/diary",
@@ -46,7 +45,16 @@ function Plus(Title, Content) {
 
 $(document).ready(function() {
 
-    // 이벤트 핸들러 등록
+
+   $("#Diary_btn").click(function() {
+       // 버튼 클릭시 다이어리 리스트 호출
+       var title = $("#Title").val();
+       var content = $("#Content").val();
+       var month = $("#Month").val();
+       Plus(title , content , month);
+   });
+
+    // 차트 부분
    $("#Money_btn").click(function() {
        // 버튼 클릭 시 호출되는 부분
        var money = $("#Money").val();
@@ -54,9 +62,13 @@ $(document).ready(function() {
        var month = $("#Month").val();
        Account_money(money, where, month);
    });
+
+    var title = "";
+    var content = "";
     var money = 0;
     var where = "";
     var month = $("#Month").val(); // 페이지 로딩 시 Month 값을 가져옴
+    Plus(title , content, month);
     Account_money(money, where, month);
 });
 
@@ -122,7 +134,7 @@ function Account_money(Money, Where, Month) {
                  total += accountList[i].money;
             }
             list_container.empty();
-            list_container.append("<div><span>" + total + "원" + "</span></div>");
+            list_container.append("<div><span>이번달 총 사용 금액 : " + total + "원" + "</span></div>");
         },
         error: function (request, status, error) {
             console.log(error); // 에러 메시지를 콘솔에 출력
@@ -136,14 +148,12 @@ function Account_money(Money, Where, Month) {
         <div id="left_container">
             <div id="diary_list">
                 <ul class="dairy_list_item">
-                <c:forEach var="diary" items="${Diary_List}" varStatus="list">
                 <div>
                 <a href="/diary/detail/${diary.title}">
-                    <span><c:out value="${diary.day}" /> 일</span>
-                    <span><c:out value="${diary.title}" /></span>
+                    <span></span>
+                    <span></span>
                 </a>
                 </div>
-                </c:forEach>
                 </ul>
             </div>
         </div>
@@ -156,7 +166,7 @@ function Account_money(Money, Where, Month) {
                 if (Month == currentMonth) { %>
                     <input type="text" placeholder="타이틀 입력" id="Title">
                     <input type="text" placeholder="내용을 입력하세요" id="Content">
-                    <button onclick="Plus(Title.value, Content.value)">추가하기</button>
+                    <button id="Diary_btn">추가 하기</button>
             <% } else {%>
                    <div> 지난 날은 입력 불 가능합니다</div>
             <% } } %>
@@ -183,10 +193,10 @@ function Account_money(Money, Where, Month) {
                              <canvas id="pieChartCanvas2" width="300px" height="300px"></canvas>
                              <div class="Chart_info">사용처별 금액</div>
                         </div>
-                        <div>
+                    </div>
+                        <div id="total_money_container">
                              <div id="total_money"></div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

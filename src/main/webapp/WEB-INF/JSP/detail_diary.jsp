@@ -29,7 +29,7 @@ List<DiaryEntity> diary = (List<DiaryEntity>) request.getAttribute("Detail");
              value="<%=diary.get(0).getContent() %>"
             id="content_value" name="Content">
         </div>
-        <input type="text" value="<%=diary.get(0).getMonth()%>" name="Month">
+        <input type="hidden" value="<%=diary.get(0).getMonth()%>" name="Month">
         <input type="hidden" value="<%=diary.get(0).getDiary_Id()%>" name="Diary_Id">
         <button id="Change" type="submit">수정</button>
     </form>

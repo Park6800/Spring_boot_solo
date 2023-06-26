@@ -42,7 +42,11 @@ public class MainController {
     @ResponseBody // json 값 diary이 반환
     public List<DiaryEntity> Update(DiaryDto diaryDto) {
         List<DiaryEntity> diaryList = new ArrayList<DiaryEntity>();
-        diaryService.diarySave(diaryDto);
+
+
+        if (diaryDto.getContent() != "" && diaryDto.getTitle() != "") {
+            diaryService.diarySave(diaryDto);
+        }
 
         diaryList = diaryService.diaryPlus(diaryDto);
         return diaryList;

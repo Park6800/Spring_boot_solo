@@ -34,3 +34,13 @@
 .Chart_info {
     text-align:center;
 }
+
+#total_money_container{
+    width:50%;
+    margin: 20px auto;
+}
+
+#total_money {
+    font-size:20px;
+    text-align:center;
+}

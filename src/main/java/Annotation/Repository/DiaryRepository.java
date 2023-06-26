@@ -15,6 +15,7 @@ public interface DiaryRepository extends JpaRepository<DiaryEntity, Long> {
     @Query(value="select * from Diary order by Day ASC",nativeQuery = true)
     public List<DiaryEntity> findByDiaryId(String title);
 
+    @Query(value="select * from Diary where Month = ?1", nativeQuery = true)
     public List<DiaryEntity> findByMonth(int Month);
 
     @Modifying

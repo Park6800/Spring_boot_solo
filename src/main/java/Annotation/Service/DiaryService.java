@@ -35,12 +35,10 @@ public class DiaryService {
         List<DiaryEntity> diarylist = new ArrayList<DiaryEntity>();
         DiaryEntity diaryEntity = DiaryEntity.toSaveEntity(diaryDto);
         try {
-            diaryRepository.save(diaryEntity);
-            diarylist = diaryRepository.findByDiaryId(diaryEntity.getTitle());
+            diarylist = diaryRepository.findByMonth(diaryEntity.getMonth());
         } catch(Exception error) {
             error.printStackTrace();
         }
-        System.out.println("service : "+ diarylist);
         return diarylist;
     }
 
@@ -72,7 +70,6 @@ public class DiaryService {
     }
 
     public List<AccountEntity> findMoney (AccountDto accountDto) {
-        System.out.println("service : " + accountDto);
         List<AccountEntity> accountlist = null;
         try {
             accountlist = accountRepository.findAll(accountDto.getMonth());
@@ -85,7 +82,6 @@ public class DiaryService {
     public void AccountSave (AccountDto accountDto) {
         AccountEntity accountEntity = AccountEntity.toSaveEntity(accountDto);
         try {
-            System.out.println(accountEntity.getWhere_use());
             accountRepository.save(accountEntity);
         } catch (Exception error){
             error.printStackTrace();
