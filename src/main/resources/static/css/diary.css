@@ -3,12 +3,18 @@
     padding:0;
 }
 
+table {
+    width:80%;
+    margin:auto;
+}
+
 #layout {
     display:flex;
 }
 
 #left_container {
     width: 65%;
+    margin:50px auto;
 }
 
 #input_container{
@@ -43,4 +49,27 @@
 #total_money {
     font-size:20px;
     text-align:center;
+}
+
+#table_line {
+    height:30px;
+}
+
+#table_date {
+    width:15%;
+    text-align:center;
+    box-size:border-box;
+    font-size:22px;
+}
+
+#table_title {
+    width:85%;
+    text-align:center;
+    box-size:border-box;
+    font-size:22px;
+}
+
+#table_not {
+    text-align:center;
+    font-size:22px;
 }
