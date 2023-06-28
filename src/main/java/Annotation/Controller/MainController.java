@@ -1,7 +1,6 @@
 package Annotation.Controller;
 
 import Annotation.Dto.AccountDto;
-import Annotation.Dto.Detail_Diary_Dto;
 import Annotation.Dto.DiaryDto;
 import Annotation.Entity.AccountEntity;
 import Annotation.Entity.DiaryEntity;
@@ -33,6 +32,7 @@ public class MainController {
         // 기존에 작성 되있던 다이어리 리스트
         // 월 별 작성 다이어리 리스트로 가져옴
         model.addAttribute("Diary_List", diaryEntities);
+
         model.addAttribute("Month" , month);
         return "diary";
     }
@@ -43,7 +43,7 @@ public class MainController {
     public List<DiaryEntity> Update(DiaryDto diaryDto) {
         List<DiaryEntity> diaryList = new ArrayList<DiaryEntity>();
 
-
+        System.out.println(diaryDto.getMonth());
         if (diaryDto.getContent() != "" && diaryDto.getTitle() != "") {
             diaryService.diarySave(diaryDto);
         }

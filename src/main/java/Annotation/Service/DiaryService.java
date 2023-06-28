@@ -39,6 +39,7 @@ public class DiaryService {
         } catch(Exception error) {
             error.printStackTrace();
         }
+        System.out.println(diarylist);
         return diarylist;
     }
 

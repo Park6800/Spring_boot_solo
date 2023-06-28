@@ -48,7 +48,7 @@ function Plus(Title, Content, Month) {
         }
     });
 }
-
+var month = "";
 $(document).ready(function() {
 
 
@@ -74,6 +74,7 @@ $(document).ready(function() {
     var money = 0;
     var where = "";
     var month = $("#Month").val(); // 페이지 로딩 시 Month 값을 가져옴
+    console.log(month);
     Plus(title , content, month);
     Account_money(money, where, month);
 });
@@ -171,9 +172,11 @@ function Account_money(Money, Where, Month) {
                 if (request.getAttribute("Month") != null) {
                     int Month = (int) request.getAttribute("Month");
                 if (Month == currentMonth) { %>
+                <div id="in_con">
                     <input type="text" placeholder="타이틀 입력" id="Title">
-                    <input type="text" placeholder="내용을 입력하세요" id="Content">
+                    <textarea placeholder="내용을 입력하세요" id="Content"></textarea>
                     <button id="Diary_btn">추가 하기</button>
+                </div>
             <% } else {%>
                    <div> 지난 날은 입력 불 가능합니다</div>
             <% } } %>
@@ -208,9 +211,10 @@ function Account_money(Money, Where, Month) {
                         <div id="total_money_container">
                              <div id="total_money"></div>
                         </div>
-                    <% } } else {%>
-                         <div> 지난 날은 입력 불 가능합니다</div>
-                    <% }  %>
+                    <% }  else {%>
+                        <input type="hidden" id="Month" value="${Month}">
+                         <div> 입력된 결과가 존재 하지 않습니다. </div>
+                    <% } }  %>
                 </div>
             </div>
         </div>

@@ -25,9 +25,8 @@ List<DiaryEntity> diary = (List<DiaryEntity>) request.getAttribute("Detail");
             id="title_value" name="Title">
         </div>
         <div>
-        <input type="text"
-             value="<%=diary.get(0).getContent() %>"
-            id="content_value" name="Content">
+        <textarea
+            id="content_value" name="Content"><%=diary.get(0).getContent() %></textarea>
         </div>
         <input type="hidden" value="<%=diary.get(0).getMonth()%>" name="Month">
         <input type="hidden" value="<%=diary.get(0).getDiary_Id()%>" name="Diary_Id">

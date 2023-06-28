@@ -28,6 +28,23 @@ table {
     background:gray;
 }
 
+#in_con {
+    width:80%;
+    margin:auto;
+}
+
+#Title {
+    width:100%;
+    height:30px;
+    margin: 20px auto;
+}
+
+#Content {
+      width:100%;
+      height:320px;
+      margin: 20px auto;
+}
+
 #Account_book {
     height:500px;
     background:green;
