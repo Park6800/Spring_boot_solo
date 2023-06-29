@@ -76,6 +76,7 @@ public class MainController {
             diaryService.AccountSave(accountDto);
         }
         accountlist = diaryService.findMoney(accountDto);
+        String MostUsed = diaryService.findmostUsed(accountDto);
 
         Map<String, Integer> MoneyMap = new HashMap<>();
         for (AccountEntity account : accountlist) {
@@ -94,6 +95,7 @@ public class MainController {
         response.put("accountList", accountlist);
         response.put("countMap", countMap);
         response.put("moneyMap", MoneyMap);
+        response.put("MostUse", MostUsed);
         return response;
     }
 }

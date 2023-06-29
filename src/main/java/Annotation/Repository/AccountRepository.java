@@ -13,6 +13,9 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
     @Query(value="select * from Account where Month= ?1",nativeQuery = true)
     public List<AccountEntity> findAll(int month);
 
+    @Query(value="select Where_use from Account where Month = ?1 group by Where_use limit 1;",nativeQuery = true)
+    public String findMostUsed(int month);
+
     @Query(value="select count(*) from Account where Where_use = ?1", nativeQuery = true)
     public int countByWhere_use(String location);
 

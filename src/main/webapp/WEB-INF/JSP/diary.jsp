@@ -94,12 +94,14 @@ function Account_money(Money, Where, Month) {
             var accountList = data.accountList;
             var countMap = data.countMap;
             var moneyMap = data.moneyMap;
+            var usedMap = data.MostUse;
 
             var labels = Object.keys(countMap);
             var dataPoints = Object.values(countMap);
 
             var moneyLabels = Object.keys(moneyMap);
             var moneyDataPoints = Object.values(moneyMap);
+            var MostUsed = Object.values(usedMap);
 
                         var pieChartData = {
                             labels: labels,
@@ -141,7 +143,7 @@ function Account_money(Money, Where, Month) {
                  total += accountList[i].money;
             }
             list_container.empty();
-            list_container.append("<div><span>이번달 총 사용 금액 : " + total + "원" + "</span></div>");
+            list_container.append("<div><span>이번달 총 사용 금액 : " + total + "원" + "</span></div><div>이번 달 가장 많은 지출 내역 : " + MostUsed + "</div>");
         },
         error: function (request, status, error) {
             console.log(error); // 에러 메시지를 콘솔에 출력

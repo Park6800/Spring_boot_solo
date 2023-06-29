@@ -89,6 +89,12 @@ public class DiaryService {
         }
     }
 
+    public String findmostUsed(AccountDto accountDto){
+        AccountEntity accountEntity = AccountEntity.toSaveEntity(accountDto);
+        String mostused = accountRepository.findMostUsed(accountEntity.getMonth());
+        return mostused;
+    }
+
     public int getCountByWhere(String location) {
         return accountRepository.countByWhere_use(location);
     }
