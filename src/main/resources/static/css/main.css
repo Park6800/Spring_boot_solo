@@ -1,0 +1,38 @@
+body {
+    margin :0;
+    padding: 0;
+    background-image:url("/img/바다.png");
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+#Main_container {
+    width:100%;
+    height:100vh;
+}
+
+#Project_file {
+    width:100px;
+    height:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    border:1px solid black;
+}
+
+#input_container {
+    position:absolute;
+    top:70%;
+    left:50%;
+}
+
+#Sel_Month {
+    width:100px;
+    height:40px;
+}
+
+#Btn_Month {
+    width:50px;
+    height:40px;
+}

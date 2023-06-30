@@ -24,8 +24,8 @@ table {
 }
 
 #right_container {
-    height:500px;
-    background:gray;
+    height:50vh;
+    border-left:1px solid black;
 }
 
 #in_con {
@@ -46,12 +46,22 @@ table {
 }
 
 #Account_book {
-    height:500px;
-    background:green;
+    height:50vh;
+    border-top:1px solid black;
+    border-left:1px solid black;
+}
+
+#Account_book > h2 {
+    text-align:center;
+}
+
+#input_money {
+    text-align:center;
 }
 
 #charts {
     display:flex;
+    justify-content:space-between;
 }
 
 .Chart_info {

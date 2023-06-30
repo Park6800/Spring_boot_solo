@@ -186,6 +186,7 @@ function Account_money(Money, Where, Month) {
             <div id="Account_book">
             <h2>가계부</h2
                 <div>
+                <div id="input_money">
                  <%
                  if (request.getAttribute("Month") != null) {
                     int Month = (int) request.getAttribute("Month");
@@ -200,6 +201,7 @@ function Account_money(Money, Where, Month) {
                         <option value="교통비">교통비</option>
                     </select>
                     <button id="Money_btn">추가 하기</button>
+                    </div>
                     <div id="charts">
                         <div class="chart-div">
                              <canvas id="pieChartCanvas" width="300px" height="300px"></canvas>
