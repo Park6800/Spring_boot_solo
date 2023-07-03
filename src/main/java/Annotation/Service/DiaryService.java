@@ -39,7 +39,6 @@ public class DiaryService {
         } catch(Exception error) {
             error.printStackTrace();
         }
-        System.out.println(diarylist);
         return diarylist;
     }
 
@@ -95,11 +94,12 @@ public class DiaryService {
         return mostused;
     }
 
-    public int getCountByWhere(String location) {
-        return accountRepository.countByWhere_use(location);
+    public int getCountByWhere(String location, int Month) {
+        return accountRepository.countByWhere_use(location , Month);
     }
 
-    public int getCountByMoney(String location) {
-        return  accountRepository.countByMoney(location);
+    // 돈의 사용 출처를 카운터
+    public int getCountByMoney(String location, int Month) {
+        return  accountRepository.countByMoney(location, Month);
     }
 }

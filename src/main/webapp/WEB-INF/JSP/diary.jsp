@@ -186,11 +186,12 @@ function Account_money(Money, Where, Month) {
             <div id="Account_book">
             <h2>가계부</h2
                 <div>
-                <div id="input_money">
+
                  <%
                  if (request.getAttribute("Month") != null) {
                     int Month = (int) request.getAttribute("Month");
                  if (Month == currentMonth) { %>
+                  <div id="input_money">
                     <input type="number" id="Money">
                     <input type="hidden" id="Month" value="${Month}">
                     <select id="Where">
@@ -202,6 +203,10 @@ function Account_money(Money, Where, Month) {
                     </select>
                     <button id="Money_btn">추가 하기</button>
                     </div>
+                      <% }  else {%>
+                      <input type="hidden" id="Month" value="${Month}">
+                      <div id="input_money"> 이번 달이 아닌 경우 입력 할 수 없습니다. </div>
+                    <% } }  %>
                     <div id="charts">
                         <div class="chart-div">
                              <canvas id="pieChartCanvas" width="300px" height="300px"></canvas>
@@ -215,10 +220,6 @@ function Account_money(Money, Where, Month) {
                         <div id="total_money_container">
                              <div id="total_money"></div>
                         </div>
-                    <% }  else {%>
-                        <input type="hidden" id="Month" value="${Month}">
-                         <div> 입력된 결과가 존재 하지 않습니다. </div>
-                    <% } }  %>
                 </div>
             </div>
         </div>

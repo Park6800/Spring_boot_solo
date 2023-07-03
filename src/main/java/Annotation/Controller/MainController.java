@@ -43,7 +43,6 @@ public class MainController {
     public List<DiaryEntity> Update(DiaryDto diaryDto) {
         List<DiaryEntity> diaryList = new ArrayList<DiaryEntity>();
 
-        System.out.println(diaryDto.getMonth());
         if (diaryDto.getContent() != "" && diaryDto.getTitle() != "") {
             diaryService.diarySave(diaryDto);
         }
@@ -71,7 +70,6 @@ public class MainController {
     @ResponseBody // json 값 diary이 반환
     public Map<String, Object> AccountMoney(AccountDto accountDto) {
         List<AccountEntity> accountlist = new ArrayList<AccountEntity>();
-        System.out.println(accountlist);
         if(accountDto.getMoney() != 0 || accountDto.getWhere_use()!="") {
             diaryService.AccountSave(accountDto);
         }
@@ -80,14 +78,14 @@ public class MainController {
 
         Map<String, Integer> MoneyMap = new HashMap<>();
         for (AccountEntity account : accountlist) {
-            int Count_Money = diaryService.getCountByMoney(account.getWhere_use());
+            int Count_Money = diaryService.getCountByMoney(account.getWhere_use(), account.getMonth());
             MoneyMap.put(account.getWhere_use(), Count_Money);
         }
 
-        // 금액 사용처
+        // 금액 사용처 Key , Value
         Map<String, Integer> countMap = new HashMap<>();
         for (AccountEntity account : accountlist) {
-            int count = diaryService.getCountByWhere(account.getWhere_use());
+            int count = diaryService.getCountByWhere(account.getWhere_use(), account.getMonth());
             countMap.put(account.getWhere_use(), count);
         }
         // Map < key , value > response에 대입
