@@ -70,7 +70,7 @@ public class MainController {
     @ResponseBody // json 값 diary이 반환
     public Map<String, Object> AccountMoney(AccountDto accountDto) {
         List<AccountEntity> accountlist = new ArrayList<AccountEntity>();
-        if(accountDto.getMoney() != 0 || accountDto.getWhere_use()!="") {
+        if(accountDto.getMoney() != 0 || accountDto.getWhere_use() != "") {
             diaryService.AccountSave(accountDto);
         }
         accountlist = diaryService.findMoney(accountDto);

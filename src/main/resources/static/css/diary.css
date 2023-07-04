@@ -59,6 +59,10 @@ table {
     text-align:center;
 }
 
+#input_con2 {
+    display:none;
+}
+
 #charts {
     display:flex;
     justify-content:space-between;

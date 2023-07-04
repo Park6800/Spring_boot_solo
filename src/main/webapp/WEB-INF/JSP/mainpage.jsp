@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id="Main_container">
-        <div>
+        <div id="Con_center">
             <div>기존 프로젝트 설명 및 파일</div>
             <div id="Project_file">파일</div>
         </div>

@@ -66,7 +66,10 @@ $(document).ready(function() {
        var money = $("#Money").val();
        var where = $("#Where").val();
        var month = $("#Month").val();
-       Account_money(money, where, month);
+       var money2 = $("#Money2").val();
+       var where2 = $("#Where2").val();
+
+       Account_money([money1, money2], [where1, where2], month);
    });
 
     var title = "";
@@ -150,6 +153,7 @@ function Account_money(Money, Where, Month) {
         }
     });
 }
+
 </script>
 </head>
 <body>

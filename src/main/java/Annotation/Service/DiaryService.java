@@ -1,7 +1,6 @@
 package Annotation.Service;
 
 import Annotation.Dto.AccountDto;
-import Annotation.Dto.Detail_Diary_Dto;
 import Annotation.Dto.DiaryDto;
 import Annotation.Entity.AccountEntity;
 import Annotation.Entity.DiaryEntity;

@@ -1,3 +1,11 @@
+* {
+    margin:0;
+    padding:0;
+    box-size:border-box;
+}
+
+
+
 body {
     margin :0;
     padding: 0;
@@ -11,9 +19,18 @@ body {
     height:100vh;
 }
 
+#Con_center {
+    text-align:center;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
 #Project_file {
     width:100px;
     height:100px;
+    margin: 30px auto;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -25,6 +42,7 @@ body {
     position:absolute;
     top:70%;
     left:50%;
+    transform: translate(-50%, -50%);
 }
 
 #Sel_Month {
